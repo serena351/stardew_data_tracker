@@ -9,9 +9,8 @@ import altair as alt
 import matplotlib.pyplot as plt
 
 # Load environment variables
-load_dotenv()
-FILEPATH = os.getenv('FILEPATH')
-DATBASE_URL = os.getenv('DATABASE_URL')
+FILEPATH = st.secrets('FILEPATH')
+DATBASE_URL = st.secrets('DATABASE_URL')
 
 # Load the save file
 tree = ET.parse(FILEPATH)
