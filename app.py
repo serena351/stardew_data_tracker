@@ -1,6 +1,5 @@
 import streamlit as st
 import xml.etree.ElementTree as ET
-from dotenv import load_dotenv
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 import pandas as pd
