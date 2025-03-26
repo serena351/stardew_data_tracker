@@ -67,7 +67,7 @@ def set_bg_hack_url():
 set_bg_hack_url()
 
 # Main page
-st.title("Stardew Valley Data Tracker")
+st.title("Stardew Valley Data Tracker 📈")
 
 col1, col2, col3 = st.columns([1, 2, 3])
 
@@ -78,7 +78,7 @@ with col1:
     st.write("Pet name: al (White Chicken) 🐔")
 
 with col2:
-    st.image("example.jpg", use_container_width=True)
+    st.image("afi.png", use_container_width=True)
 
 with col3:
     st.subheader("Game Info") 
