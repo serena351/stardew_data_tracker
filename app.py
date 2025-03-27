@@ -39,7 +39,7 @@ today = f"Day {root.find('player/dayOfMonthForSaveGame').text} of {season}"
 
 # Main page
 st.set_page_config(
-    page_title="Stardew Valley Data Tracker 📈", page_icon="🌿", initial_sidebar_state="collapsed", layout="wide"
+    page_title="Stardew Valley Data Tracker 📈", page_icon="🌿", initial_sidebar_state="auto", layout="wide"
 )
 
 # Background image
@@ -124,21 +124,24 @@ table = Table('stardew_data', metadata, autoload_with=engine)
 query = session.query(table)
 df = pd.read_sql(query.statement, query.session.bind)
 
+# Create 'date' column for correct ordering 
+df['date'] = df['day'].str.extract(r'(\d+)').astype(int) 
+
 # Visualisations for each option selected
 if option == "Money":
     st.subheader("Money 🪙")
     st.write("Visualising the money data:")
     st.write("Money earned over time")
-    chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('money', scale=alt.Scale(domain=[20000, 35000]))) +
-    alt.Chart(df).mark_circle(size=50).encode(x='day', y='money'))
+    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('money', title='Current Earnings', scale=alt.Scale(domain=[20000, 35000]))) +
+    alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='money'))
     st.write(chart)
     
 elif option == "Friendship with Marnie":
     st.subheader("Friendship with Marnie 💚")
     st.write("Visualising the friendship data:")
     st.write("Friendship with Marnie over time")
-    chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('marnie_friendship', scale=alt.Scale(domain=[850, 1300]))) +
-             alt.Chart(df).mark_circle(size=50).encode(x='day', y='marnie_friendship'))
+    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('marnie_friendship', title='Friendship Points', scale=alt.Scale(domain=[850, 1300]))) +
+             alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='marnie_friendship'))
     st.write(chart)
 
 elif option == "Experience Points":
@@ -148,38 +151,38 @@ elif option == "Experience Points":
     if skill == "Farming":
         st.write("Visualising the farming data:")
         st.write("Farming experience points over time 🌱")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('farming_xp', scale=alt.Scale(domain=[5400, 6500]))) +
-                alt.Chart(df).mark_circle(size=50).encode(x='day', y='farming_xp'))
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('farming_xp', title='Farming XP', scale=alt.Scale(domain=[5400, 6500]))) +
+                alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='farming_xp'))
         st.write(chart)
     elif skill == "Mining":
         st.write("Visualising the mining data:")
         st.write("Mining experience points over time 💎")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('mining_xp', scale=alt.Scale(domain=[10900, 12100]))) +
-             alt.Chart(df).mark_circle(size=50).encode(x='day', y='mining_xp'))
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('mining_xp', title='Mining XP', scale=alt.Scale(domain=[10900, 12100]))) +
+             alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='mining_xp'))
         st.write(chart)
     elif skill == "Foraging":
         st.write("Visualising the foraging data:")
         st.write("Foraging experience points over time 🌲")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('foraging_xp', scale=alt.Scale(domain=[9000, 10500]))) +
-                alt.Chart(df).mark_circle(size=50).encode(x='day', y='foraging_xp'))
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('foraging_xp', title='Foraging XP', scale=alt.Scale(domain=[9000, 10500]))) +
+                alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='foraging_xp'))
         st.write(chart)
     elif skill == "Fishing":
         st.write("Visualising the fishing data:")
         st.write("Fishing experience points over time 🎣")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('fishing_xp', scale=alt.Scale(domain=[11000, 11700]))) +
-                alt.Chart(df).mark_circle(size=50).encode(x='day', y='fishing_xp'))
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('fishing_xp', title='Fishing XP', scale=alt.Scale(domain=[11000, 11700]))) +
+                alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='fishing_xp'))
         st.write(chart)
     else:
         st.write("Visualising the combat data:")
         st.write("Combat experience points over time 🗡️")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('combat_xp', scale=alt.Scale(domain=[8000, 9000]))) +
-                alt.Chart(df).mark_circle(size=50).encode(x='day', y='combat_xp'))
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('combat_xp', title = 'Combat XP', scale=alt.Scale(domain=[8000, 9000]))) +
+                alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='combat_xp'))
         st.write(chart)
 
 else: 
     st.subheader("Pet Friendship")
     st.write("Visualising the pet friendship data:")
     st.write("Friendship with al over time 🐔")
-    chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('al_friendship', scale=alt.Scale(domain=[575, 700]))) +
-             alt.Chart(df).mark_circle(size=50).encode(x='day', y='al_friendship'))
+    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('al_friendship', title='Friendship Points', scale=alt.Scale(domain=[575, 700]))) +
+             alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='al_friendship'))
     st.write(chart)
