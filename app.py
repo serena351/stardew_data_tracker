@@ -78,7 +78,7 @@ with col2:
     st.write("Pet name: al (White Chicken) 🐔")
 
 with col1:
-    st.image("afi.png", use_container_width=False, width=150) # set to False and try width=150 instead
+    st.image("static/afi.png", use_container_width=False, width=150) # set to False and try width=150 instead
 
 with col3:
     st.subheader("Game Info") 
