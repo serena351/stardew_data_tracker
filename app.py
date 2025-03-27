@@ -2,7 +2,7 @@ import streamlit as st
 import xml.etree.ElementTree as ET
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import pandas as pd
 import os
 import altair as alt
@@ -10,7 +10,7 @@ import base64
 
 # Load environment variables
 FILEPATH = st.secrets['FILEPATH']
-DATBASE_URL = st.secrets['DATABASE_URL']     # uncomment when app deployed 
+DATBASE_URL = st.secrets['DATABASE_URL']    
 
 # # Load environment variables
 # load_dotenv()
@@ -71,14 +71,14 @@ st.title("Stardew Valley Data Tracker 📈")
 
 col1, col2, col3 = st.columns([1, 2, 3])
 
-with col1:
+with col2:
     st.subheader("Player Info")
-    st.write(f"Player Name: {player_name}")
-    st.write(f"Farm Name: {farm_name} Farm")
+    st.write(f"Player name: {player_name}")
+    st.write(f"Farm name: {farm_name} Farm")
     st.write("Pet name: al (White Chicken) 🐔")
 
-with col2:
-    st.image("afi.png", use_container_width=True)
+with col1:
+    st.image("afi.png", use_container_width=False, width=150) # set to False and try width=150 instead
 
 with col3:
     st.subheader("Game Info") 
@@ -148,25 +148,25 @@ elif option == "Experience Points":
     if skill == "Farming":
         st.write("Visualising the farming data:")
         st.write("Farming experience points over time 🌱")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('farming_xp', scale=alt.Scale(domain=[5400, 6300]))) +
+        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('farming_xp', scale=alt.Scale(domain=[5400, 6500]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x='day', y='farming_xp'))
         st.write(chart)
     elif skill == "Mining":
         st.write("Visualising the mining data:")
         st.write("Mining experience points over time 💎")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('mining_xp', scale=alt.Scale(domain=[10900, 12000]))) +
+        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('mining_xp', scale=alt.Scale(domain=[10900, 12100]))) +
              alt.Chart(df).mark_circle(size=50).encode(x='day', y='mining_xp'))
         st.write(chart)
     elif skill == "Foraging":
         st.write("Visualising the foraging data:")
         st.write("Foraging experience points over time 🌲")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('foraging_xp', scale=alt.Scale(domain=[9000, 10000]))) +
+        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('foraging_xp', scale=alt.Scale(domain=[9000, 10500]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x='day', y='foraging_xp'))
         st.write(chart)
     elif skill == "Fishing":
         st.write("Visualising the fishing data:")
         st.write("Fishing experience points over time 🎣")
-        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('fishing_xp', scale=alt.Scale(domain=[11000, 11500]))) +
+        chart = (alt.Chart(df).mark_line().encode(x='day', y=alt.Y('fishing_xp', scale=alt.Scale(domain=[11000, 11700]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x='day', y='fishing_xp'))
         st.write(chart)
     else:
