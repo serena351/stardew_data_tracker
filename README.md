@@ -18,7 +18,8 @@ stardew_data/
 ├── static/ # Folder for static assets (images) 
 |   ├── afi.png # Player image
 |   ├── bg.jpg # Background image
-|   └── game.jpg # Game start screen
+|   ├── game.jpg # Game start screen
+|   └── website_preview.png # Streamlit app preview
 ├── .gitignore
 ├── README.md # Project documentation 
 ├── app.py # Streamlit app for visualising the data 
@@ -35,4 +36,4 @@ All columns (except for the primary key) were then transformed to integers befor
 
 The app allows you to select certain variables to visualise over the in-game days for which data was collected. For example, it allows you to track earnings over the week. This was done for my most recent save file but can be easily replicated for other players by changing the `FILEPATH` variable in the extraction script to their own save file. They can then decide which database/location they want to store their data in and change the `DATABASE_URL` variable accordingly.
 
-[stardewdatatracker]('https://stardewdatatracker.streamlit.app')
+[![Stardew Valley Data Tracker](static/website_preview.png)](https://stardewdatatracker.streamlit.app)
