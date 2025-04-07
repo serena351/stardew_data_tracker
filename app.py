@@ -75,7 +75,7 @@ with col2:
     st.subheader("Player Info")
     st.write(f"Player name: {player_name}")
     st.write(f"Farm name: {farm_name} Farm")
-    st.write("Pet name: al (White Chicken) 🐔")
+    st.write("Farm animals: al (White Chicken) 🐔")
 
 with col1:
     st.image("static/afi.png", use_container_width=False, width=150) # set to False and try width=150 instead
