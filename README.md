@@ -21,19 +21,20 @@ stardew_data/
 |   ├── game.jpg # Game start screen
 |   └── website_preview.png # Streamlit app preview
 ├── .gitignore
-├── README.md # Project documentation 
 ├── app.py # Streamlit app for visualising the data 
 ├── extract.py # Script for extracting data from the save file 
+├── index.py # Runs above script every time save file is updated
+├── README.md # Project documentation 
 └── requirements.txt # Python dependencies  
 ```
 
 ## ETL pipeline
 
 The data was extracted from the save file after each in-game day using an XML parser - `xml.etree.ElementTree` - in Python.
-All columns (except for the primary key) were then transformed to integers before being loaded into a Postgres database using `sqlalchemy`.
+All columns (except for the primary key and the `talked_to_today` column) were then transformed to integers before being loaded into a Postgres database using the `sqlalchemy` package.
 
 ## Streamlit app
 
-The app allows you to select certain variables to visualise over the in-game days for which data was collected. For example, it allows you to track earnings over the week. This was done for my most recent save file but can be easily replicated for other players by changing the `FILEPATH` variable in the extraction script to their own save file. They can then decide which database/location they want to store their data in and change the `DATABASE_URL` variable accordingly.
+The app allows you to select certain variables to visualise over the in-game days for which data was collected. For example, it allows you to track earnings over the week. This was done for my most recent save file but can be easily replicated for other players by changing the `FILEPATH` variable in the extract.py and index.py scripts to their own save file. They can then decide which database/location they want to store their data in and change the `DATABASE_URL` variable accordingly.
 
 [![Stardew Valley Data Tracker](static/website_preview.png)](https://stardewdatatracker.streamlit.app)

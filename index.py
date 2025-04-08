@@ -3,13 +3,19 @@ from watchdog.events import FileSystemEventHandler
 import os
 import time
 import subprocess
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+FILEPATH = os.getenv("FILEPATH")
+PARENT_DIR = os.path.dirname(FILEPATH)
 
 class Handler(FileSystemEventHandler):
     def __init__(self):
         self.last_modified = None
 
     def on_modified(self, event): # run extract.py every time save file is updated
-        if not event.is_directory and os.path.basename(event.src_path) == "Afis_346896825":
+        if not event.is_directory and event.src_path == FILEPATH:
             current_time = time.time()
             if self.last_modified and self.last_modified[0] == event.src_path and current_time - self.last_modified[1] < 2:
                 return # ignore duplicate events
@@ -24,7 +30,7 @@ class Handler(FileSystemEventHandler):
                 print(f"Error while running extract.py: {e}")
             
 observer = Observer() # initialise observer
-observer.schedule(Handler(), "C:/Users/seren/AppData/Roaming/StardewValley/Saves/Afis_346896825") # watch parent directory of file
+observer.schedule(Handler(), FILEPATH) # watch parent directory of file
 observer.start()
 
 try:
