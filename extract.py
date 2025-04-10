@@ -20,7 +20,10 @@ season = root.find('player/seasonForSaveGame').text
 
 money = root.find('player/money').text # current amount of gold for that (in-game) day
 
-al_friendship = root.find('.//friendshipTowardFarmer').text # al's friendship points
+for animal in root.findall('.//animals/item/value/FarmAnimal'):
+    name = animal.find('./name').text
+    if name == 'al':
+        al_friendship = animal.find('./friendshipTowardFarmer').text # al's friendship points
 friendships = root.find('player').find('friendshipData')
 for item in friendships:
     character = item.find('key').find('string').text

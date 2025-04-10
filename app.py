@@ -134,7 +134,7 @@ if option == "Money":
     st.subheader("Money 🪙")
     st.write("Visualising the money data:")
     st.write("Money earned over time")
-    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('money', title='Current Earnings', scale=alt.Scale(domain=[25000, 35000]))) +
+    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('money', title='Current Earnings', scale=alt.Scale(domain=[20000, 30000]))) +
     alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='money', tooltip=['day', 'money', 'crops_shipped']))
     st.write(chart)
     
@@ -153,7 +153,7 @@ elif option == "Experience Points":
     if skill == "Farming":
         st.write("Visualising the farming data:")
         st.write("Farming experience points over time 🌱")
-        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('farming_xp', title='Farming XP', scale=alt.Scale(domain=[6300, 7000]))) +
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('farming_xp', title='Farming XP', scale=alt.Scale(domain=[6300, 7400]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='farming_xp', tooltip=['day', 'farming_xp', 'seeds_sown', 'chicken_eggs_layed']))
         st.write(chart)
     elif skill == "Mining":
@@ -165,7 +165,7 @@ elif option == "Experience Points":
     elif skill == "Foraging":
         st.write("Visualising the foraging data:")
         st.write("Foraging experience points over time 🌲")
-        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('foraging_xp', title='Foraging XP', scale=alt.Scale(domain=[10100, 10700]))) +
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('foraging_xp', title='Foraging XP', scale=alt.Scale(domain=[10100, 11100]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='foraging_xp', tooltip=['day', 'foraging_xp', 'items_foraged']))
         st.write(chart)
     elif skill == "Fishing":
@@ -177,7 +177,7 @@ elif option == "Experience Points":
     else:
         st.write("Visualising the combat data:")
         st.write("Combat experience points over time 🗡️")
-        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('combat_xp', title = 'Combat XP', scale=alt.Scale(domain=[8600, 9600]))) +
+        chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('combat_xp', title = 'Combat XP', scale=alt.Scale(domain=[8600, 9000]))) +
                 alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='combat_xp', tooltip=['day', 'combat_xp', 'monsters_killed']))
         st.write(chart)
 
@@ -185,6 +185,6 @@ else:
     st.subheader("Pet Friendship")
     st.write("Visualising the pet friendship data:")
     st.write("Friendship with al over time 🐔")
-    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('al_friendship', title='Friendship Points', scale=alt.Scale(domain=[685, 800]))) +
+    chart = (alt.Chart(df).mark_line().encode(x=alt.X('day:O', title='Day', sort=df['date']), y=alt.Y('al_friendship', title='Friendship Points', scale=alt.Scale(domain=[685, 805]))) +
              alt.Chart(df).mark_circle(size=50).encode(x=alt.X('day:O', sort=df['date']), y='al_friendship', tooltip=['day', 'al_friendship', 'chicken_eggs_layed']))
     st.write(chart)
