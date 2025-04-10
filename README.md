@@ -2,7 +2,7 @@
 
 ![Stardew Valley](static/game.jpg)
 
-Stardew Valley is a popular indie role-playing game (designed by Eric Barone) where players inherit an old farm plot and begin life in a new town called 'Stardew Valley'. The purpose of this project is to track player's stats over time, such as experience points and earnings.
+Stardew Valley is a popular indie role-playing game (designed by Eric Barone) where players inherit an old farm plot and begin life in a new place called 'Stardew Valley'. The purpose of this project is to track player's stats over time, such as experience points and earnings, to allow them to strategise or even just satisfy their curiosity about how they've been doing so far. 
 
 ## Project Structure 
 
@@ -30,11 +30,15 @@ stardew_data/
 
 ## ETL pipeline
 
-The data was extracted from the save file after each in-game day using an XML parser - `xml.etree.ElementTree` - in Python.
-All columns (except for the primary key and the `talked_to_today` column) were then transformed to integers before being loaded into a Postgres database using the `sqlalchemy` package.
+* The data was extracted from the save file after each in-game day using an XML parser - `xml.etree.ElementTree` - in Python. (Using `watchdog` to detect when the save file was modified in order to trigger the extraction process.)
+* All columns (except for the primary key and the `talked_to_today` column) were then transformed to integers.
+* The data was then loaded into a Postgres database using the `sqlalchemy` package.
 
 ## Streamlit app
 
-The app allows you to select certain variables to visualise over the in-game days for which data was collected. For example, it allows you to track earnings over the week. This was done for my most recent save file but can be easily replicated for other players by changing the `FILEPATH` variable in the extract.py and index.py scripts to their own save file. They can then decide which database/location they want to store their data in and change the `DATABASE_URL` variable accordingly.
+* The app allows you to select certain variables to visualise over the in-game days for which data was collected. For example, it allows you to track earnings over the week. This was done for my most recent save file just to demonstrate, but can be easily replicated for other players by changing the `FILEPATH` variable in the extract.py and index.py scripts to their own save file. They can then decide which database/location they want to store their data in and change the `DATABASE_URL` variable accordingly.
+* The tooltip shows other variables which may have had an impact on the y-axis for each chart. For example, when visualising money earned, one can see the cumulative number of 'crops shipped' (sold) for each data point.
+
+The app is accessible below:
 
 [![Stardew Valley Data Tracker](static/website_preview.png)](https://stardewdatatracker.streamlit.app)
