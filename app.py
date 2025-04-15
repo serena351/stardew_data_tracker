@@ -79,7 +79,7 @@ with col2:
     st.write("Farm animals: al (White Chicken) 🐔")
 
 with col1:
-    st.image("static/afi.png", use_container_width=False, width=150) 
+    st.image("static/afi.png", use_container_width=False, width=150)   # can be replaced by a screenshot of your character image
 
 with col3:
     st.subheader("Game Info") 

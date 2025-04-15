@@ -88,7 +88,7 @@ transformed_data = {'day': f"Day {day} of {season}",
 
 # Create an engine and metadata
 engine = create_engine(DATABASE_URL)
-metadata = MetaData(schema='student')
+metadata = MetaData(schema='student')   # remove this argument to use main schema or change to your schema name
 
 # Define the table
 stats_table = Table(

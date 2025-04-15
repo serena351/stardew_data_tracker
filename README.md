@@ -11,7 +11,7 @@ stardew_data/
 ├── .streamlit/ # Streamlit configuration folder  
 |   └── config.toml # Streamlit theme 
 ├── Afis_346896825/
-|   ├── Afis_346896825 # most up to date save file
+|   ├── Afis_346896825 # Most up to date save file
 |   ├── Afis_346896825_old
 |   ├── SaveGameInfo
 |   └── SaveGameInfo_old
@@ -42,3 +42,21 @@ stardew_data/
 The app is accessible below:
 
 [![Stardew Valley Data Tracker](static/website_preview.png)](https://stardewdatatracker.streamlit.app)
+
+## **Extraction Script Instructions**
+
+Things to note after forking and cloning this repo:
+* Your `.env` file should contain variables `FILEPATH` (path to your save file), `DATABASE_URL` (database connection) and `FILENAME` (name of your save file). If deciding to deploy a Streamlit app rather than running it locally, you must additionally place these variables in a `secrets.toml` file and access them that way.
+* The `extract.py` file should be edited to include the correct schema name for your database table.
+* Place a screenshot of your character in the static folder - you can either give it the name `afi.png` or replace this name in `app.py`.
+
+1. To install dependencies, run the following in a terminal:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. To deploy the ETL pipeline, given that you have the correct variables in your `.env` file, run:
+
+   ```bash
+   python index.py
+   ```
+   and simply begin playing.
